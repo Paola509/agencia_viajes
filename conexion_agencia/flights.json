@@ -1,0 +1,26 @@
+[
+    {
+        "origin": "Madrid",
+        "destination": "Barcelona",
+        "date": "2024-08-01",
+        "price": 100
+    },
+    {
+        "origin": "Madrid",
+        "destination": "Lisboa",
+        "date": "2024-08-01",
+        "price": 120
+    },
+    {
+        "origin": "Barcelona",
+        "destination": "Madrid",
+        "date": "2024-08-02",
+        "price": 110
+    },
+    {
+        "origin": "Lisboa",
+        "destination": "Madrid",
+        "date": "2024-08-03",
+        "price": 130
+    }
+]

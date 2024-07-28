@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Búsqueda de Vuelos</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Búsqueda de Vuelos</h1>
+        <form id="searchForm" action="search.php" method="POST">
+            <label for="origin">Origen:</label>
+            <input type="text" id="origin" name="origin" required>
+
+            <label for="destination">Destino:</label>
+            <input type="text" id="destination" name="destination" required>
+
+            <label for="date">Fecha:</label>
+            <input type="date" id="date" name="date" required>
+
+            <button type="submit">Buscar</button>
+        </form>
+
+        <div id="results"></div>
+    </div>
+
+    <script>
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = new FormData(this);
+            fetch('search.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                const resultsDiv = document.getElementById('results');
+                resultsDiv.innerHTML = '';
+                
+                if (data.length === 0) {
+                    resultsDiv.innerHTML = '<p>No se encontraron vuelos.</p>';
+                } else {
+                    data.forEach(flight => {
+                        const flightDiv = document.createElement('div');
+                        flightDiv.className = 'flight';
+                        flightDiv.innerHTML = `
+                            <p>Origen: ${flight.origin}</p>
+                            <p>Destino: ${flight.destination}</p>
+                            <p>Fecha: ${flight.date}</p>
+                            <p>Precio: $${flight.price}</p>
+                        `;
+                        resultsDiv.appendChild(flightDiv);
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
